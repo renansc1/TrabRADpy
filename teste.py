@@ -1,4 +1,4 @@
-import tkinter
+import tkinter as tk
 from tkinter import messagebox as mb
 from tkinter import ttk
 import sqlite3
@@ -41,19 +41,31 @@ def funcExemplo():
     print("Exemplo de funcao")
 
 def Main():
-    root = tkinter.Tk()
+    root = tk.Tk()
     root.title("Trabalho RAD")
     root.resizable(True, True)
 
-    label = tkinter.Label(root, text="Nome")
+    label = tk.Label(root, text="Nome")
     label.pack()
 
-    textoEntrada = tkinter.StringVar()
-    e1 = tkinter.Entry(root)
+    textoEntrada = tk.StringVar()
+    e1 = tk.Entry(root)
     e1.bind('<Key>', lambda x:textoEntrada.set(e1.get()+x.char))
     e1.pack()
 
-    test2 = tkinter.Button(root, text="Salvar")
+    l2 = tk.Label(root, text='CPF')
+    l2.pack()
+
+    e2 = tk.Entry(root)
+    e2.pack()
+
+    l3 = tk.Label(root, text="Estado")
+    l3.pack()
+
+    e3 = tk.Entry(root)
+    e3.pack()
+    
+    test2 = tk.Button(root, text="Salvar")
     test2['command'] = funcExemplo  #alterar para chamar outra função
     test2.pack()
 
