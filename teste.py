@@ -1,6 +1,7 @@
 import tkinter as tk
 from tkinter import messagebox as mb
 from tkinter import ttk
+from tkinter import PhotoImage
 import sqlite3
 
 #começar com tela com um botão e um entry (nome)- v1
@@ -43,7 +44,11 @@ def funcExemplo():
 def Main():
     root = tk.Tk()
     root.title("Trabalho RAD")
-    root.resizable(True, True)
+    root.geometry('714x260')
+    root.resizable(False, False)
+    bi = PhotoImage(file=r"C:\Users\Usuário\Desktop\TrabRad\bg.png")
+    bi_l = tk.Label(root, image=bi)
+    bi_l.place(x=0, y=0, relwidth=1, relheight=1)
 
     label = tk.Label(root, text="Nome")
     label.pack()
