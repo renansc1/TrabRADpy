@@ -21,6 +21,10 @@ connection = sqlite3.connect("teste.db")
 #Cria o cursos e cria a tabela
 cursor = connection.cursor()
 cursor.execute("CREATE TABLE IF NOT EXISTS Tabela1 (nome TEXT, curso TEXT, matricula INTEGER)")
+
+#Ler config
+config = open('config.txt', 'r')
+
 def VerificarCPF(CPF):
     #CPF deve ser na forma "123.456.789-10"
     for trecho in CPF.split("."):
@@ -33,6 +37,7 @@ def inserevalores(Valor1, Valor2, Valor3):
     #Insere linha na tabela
      cursor.execute(f"INSERT INTO Tabela1 VALUES ('{Valor1}', '{Valor2}', '{Valor3}')")
     print('adicionado')
+    print(config.read())
     pegavalores()
 
 def pegavalores():
