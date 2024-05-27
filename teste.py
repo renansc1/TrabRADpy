@@ -29,9 +29,11 @@ def VerificarCPF(CPF):
         else:
             return True
 
-def inserevalores(Valor1, Valor2):
+def inserevalores(Valor1, Valor2, Valor3):
     #Insere linha na tabela
-    cursor.execute("INSERT INTO Tabela1 VALUES ('"+Valor1+"', '"+Valor2+"')")
+     cursor.execute(f"INSERT INTO Tabela1 VALUES ('{Valor1}', '{Valor2}', '{Valor3}')")
+    print('adicionado')
+    pegavalores()
 
 def pegavalores():
     #Pega valores da tabela
@@ -71,7 +73,7 @@ def Main():
     e3.pack()
     
     test2 = tk.Button(root, text="Salvar")
-    test2['command'] = funcExemplo  #alterar para chamar outra função
+    test2['command'] = lambda:inserevalores(Valor1=e1.get(), Valor2=e2.get(), Valor3=e3.get())  #alterar para chamar outra função
     test2.pack()
 
     root.iconify() #Minimiza a tela
