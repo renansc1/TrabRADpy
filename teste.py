@@ -3,6 +3,7 @@ from tkinter import messagebox as mb
 from tkinter import ttk
 from tkinter import PhotoImage
 from tkinter import StringVar
+from tkinter import messagebox
 import sqlite3
 
 #começar com tela com um botão e um entry (nome)- v1
@@ -21,27 +22,42 @@ connection = sqlite3.connect("teste.db")
 
 #Cria o cursos e cria a tabela
 cursor = connection.cursor()
-cursor.execute("CREATE TABLE IF NOT EXISTS Tabela1 (nome TEXT, curso TEXT, matricula INTEGER)")
+cursor.execute("CREATE TABLE IF NOT EXISTS Tabela1 (nome TEXT, cpf TEXT, estado TEXT)")
 
 #Ler config
 config = open('config.txt', 'r')
+config_read = config.read()
+config_final = config_read.split(';')
+
 
 def VerificarCPF(CPF):
     #CPF deve ser na forma "123.456.789-10"
     print(CPF)
+    validado = True
+    if len(CPF)!=14:
+        return False
+    CPF = CPF.split("-")[0]
     for trecho in CPF.split("."):
-         if len(CPF)!=14:
-            return False
         if len(trecho)!=3:
-            return False
-        else:
-            return True
+                validado = False
+    return validado
+
+def Verificar_Estado(estado):
+    print(estado)
+    if estado in config_final:
+        return True
+    else:
+        return False
 
 def inserevalores(Valor1, Valor2, Valor3):
     #Insere linha na tabela
-     cursor.execute(f"INSERT INTO Tabela1 VALUES ('{Valor1}', '{Valor2}', '{Valor3}')")
-    print(config.read())
-    pegavalores()
+ if VerificarCPF(Valor2) and Verificar_Estado(Valor3):
+        cursor.execute(f"INSERT INTO Tabela1 VALUES ('{Valor1}', '{Valor2}', '{Valor3}')")
+        messagebox.showinfo('Aviso!', 'Adicionado com sucesso!')
+        print('adicionado')
+    else:
+        messagebox.showinfo('Erro!', 'Não adicionado. Informações Incorretas.')
+        print('Error.')
 
 def pegavalores():
     #Pega valores da tabela
@@ -79,6 +95,7 @@ def Main():
 
     e3 = tk.Entry(root)
     e3.pack()
+    print(config_final)
 
     l4 = tk.Label(root, text='Função')
     l4.pack()
