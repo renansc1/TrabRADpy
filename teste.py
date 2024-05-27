@@ -2,6 +2,7 @@ import tkinter as tk
 from tkinter import messagebox as mb
 from tkinter import ttk
 from tkinter import PhotoImage
+from tkinter import StringVar
 import sqlite3
 
 #começar com tela com um botão e um entry (nome)- v1
@@ -76,6 +77,15 @@ def Main():
 
     e3 = tk.Entry(root)
     e3.pack()
+
+    l4 = tk.Label(root, text='Função')
+    l4.pack()
+
+
+    variable = StringVar(root)
+    variable.set('CLT')
+    d1 = tk.OptionMenu(root, variable, 'CLT','MEI', 'Sócio')
+    d1.pack()
     
     test2 = tk.Button(root, text="Salvar")
     test2['command'] = lambda:inserevalores(Valor1=e1.get(), Valor2=e2.get(), Valor3=e3.get())  #alterar para chamar outra função
