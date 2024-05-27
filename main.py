@@ -1,0 +1,2 @@
+from teste import *
+Main()
